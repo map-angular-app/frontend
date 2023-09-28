@@ -1,0 +1,25 @@
+<div class="container h-full w-full">
+  <!-- <router-outlet /> -->
+  <div class="bottom_nav-bar fixed bottom-0 right-0 left-0 h-[80px] bg-white">
+    <div id="bottom_nav" class="bottom_nav flex items-center justify-around h-full">
+      <button id="map_select" (click)="onChangeTab($event, 'maps')"
+        class="bottom_nav-item active w-full h-full pb-[20px]">
+        <i class="fa-solid fa-earth-asia"></i>
+        <div class="text-sm">Map</div>
+      </button>
+      <button id="filter_select" (click)="onChangeTab($event, 'filters')"
+        class="bottom_nav-item w-full h-full pb-[20px]">
+        <i class="fa-solid fa-location-dot"></i>
+        <div class="text-sm">Filter</div>
+      </button>
+    </div>
+  </div>
+  <div class="the-tabs-content-holder">
+    <app-map (initCurrentPositionEvent)="setIsInitCurrentPosition($event)" [mapLoading]="mapLoading" id="maps_tab"
+      [hidden]="tab!='maps'"></app-map>
+    <app-filter #filterComponent [isInitCurrentPosition]="isInitCurrentPosition" id="filters_tab"
+      [hidden]="tab!='filters'" (setFilterEvent)="setMarkers($event)" (setFlyEvent)="onFlyToMarker($event)"
+      (resetEvent)="onReset()"></app-filter>
+  </div>
+</div>
+<div id="info_marker" class="bg-white absolute bottom-0 w-full z-[999] h-[180px] hidden font-sans"></div>

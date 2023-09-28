@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-black: hsl(0, 0%, 10%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-darken: hsl(0, 0%, 20%);
+  --color-teal-100: hsl(160, 85%, 87%);
+  --color-teal-200: hsl(162, 78%, 77%);
+  --color-teal-300: hsl(162, 72%, 65%);
+  --color-teal-400: hsl(162, 68%, 54%);
+  --color-teal-500: hsl(162, 73%, 46%);
+  --color-teal-600: hsl(162, 82%, 40%);
+  --color-teal-700: hsl(162, 87%, 35%);
+  --color-teal-800: hsl(162, 88%, 30%);
+  --shadow-small: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 -4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.gmnoprint a,
+.gmnoprint span,
+.gm-style-cc {
+  display: none;
+}
+.gmnoprint div {
+  background: none !important;
+}
+
+.dot-marker {
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out, box-shadow 1s ease-in-out;
+  background: #5384ed;
+}
+.is-highlighted {
+  box-shadow: 0 0 0 3px #0099e5, 0 0 0 6px rgba(0, 153, 229, 0.5);
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+div.ant-card-meta-description.ng-star-inserted {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.blur {
+  filter: blur(2px) opacity(0.4);
+}

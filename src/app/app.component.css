@@ -1,0 +1,21 @@
+.container {
+  max-width: 100vw !important;
+}
+
+.bottom_nav-item.active {
+  color: #449cd5;
+  background-color: #dbdbdb;
+  /* border-top-left-radius: 1.5rem; */
+  /* border-top-right-radius: 1.5rem; */
+}
+.bottom_nav-bar {
+  /* border-top-left-radius: 1.5rem; */
+  /* border-top-right-radius: 1.5rem; */
+  background: var(--color-white);
+  box-shadow: var(--shadow-medium);
+}
+
+#info_marker {
+  background: var(--color-white);
+  box-shadow: var(--shadow-medium);
+}

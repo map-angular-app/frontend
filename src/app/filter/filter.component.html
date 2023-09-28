@@ -1,0 +1,84 @@
+<div class="filter">
+  <div nz-row class="px-4 pt-[80px]">
+    <div nz-col nzSpan="24" class="pb-8 text-center">
+      <span class="text-2xl font-medium ">Filter Hospital List</span>
+    </div>
+    <div nz-col nzSpan="24" class="text-center pb-4">
+      <nz-select nzAllowClear nzPlaceHolder="Select filter type" [(ngModel)]="filterType" class="w-[80%]"
+        [nzDisabled]="loading" (ngModelChange)="onChangeType($event)">
+        <nz-option *ngIf="isInitCurrentPosition" nzLabel="Your Current Location"
+          [nzValue]="filters.current"></nz-option>
+        <nz-option nzLabel="Particular City" [nzValue]="filters.city"></nz-option>
+        <nz-option nzLabel="Hospital Chains" [nzValue]="filters.hospital"></nz-option>
+      </nz-select>
+    </div>
+    <div *ngIf="filterType == 'city'" nz-col nzSpan="24" class="text-center pb-4">
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select City" class="w-[80%]" [nzDisabled]="loading"
+        [(ngModel)]="filterValue">
+        <ng-container *ngFor="let option of optionsCity">
+          <nz-option *ngIf="!loadingCitys" [nzLabel]="option.label" [nzValue]="option.position">
+            {{ option.label }}
+          </nz-option>
+        </ng-container>
+        <nz-option *ngIf="loadingCitys" nzDisabled nzCustomContent>
+          <i nz-icon nzType="loading" class="loading-icon"></i>
+          <span class="loading-title">Loading Data...</span>
+        </nz-option>
+      </nz-select>
+    </div>
+    <div *ngIf="filterType == 'hospital_chain'" nz-col nzSpan="24" class="text-center pb-4">
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Hospital Chain" [nzDisabled]="loading" class="w-[80%]"
+        [(ngModel)]="filterValue">
+        <ng-container *ngFor="let option of optionsHospitalChain">
+          <nz-option *ngIf="!loadingHospitalChains" [nzLabel]="option.label" [nzValue]="option.value">
+            {{ option.label }}
+          </nz-option>
+        </ng-container>
+        <nz-option *ngIf="loadingHospitalChains" nzDisabled nzCustomContent>
+          <i nz-icon nzType="loading" class="loading-icon"></i>
+          <span class="loading-title">Loading Data...</span>
+        </nz-option>
+      </nz-select>
+    </div>
+    <div *ngIf="filterType=='current_location' || (filterType == 'city' && filterValue);else block_component" nz-col
+      nzSpan="12" class="text-center">
+      <nz-space nzDirection="vertical" style="width: 100%">
+        <nz-input-number-group *nzSpaceItem nzAddOnBefore="Radius" nzAddOnAfter="km" style="width:100%">
+          <nz-input-number [(ngModel)]="radius" [nzStep]="1" nzMin="10" nzMax="500"></nz-input-number>
+        </nz-input-number-group>
+      </nz-space>
+    </div>
+    <ng-template #block_component>
+      <div nz-col nzSpan="12"></div>
+    </ng-template>
+    <div nz-col nzSpan="12">
+      <button nz-button nzType="primary" class="float-right" [disabled]="getDisabledApplyButton()" (click)="onFilter()">
+        Apply
+      </button>
+      <button nz-button nzType="primary" nzDanger class="float-right mr-2" [disabled]="hospitals.length<=0"
+        (click)="onReset()">
+        Clear
+      </button>
+    </div>
+  </div>
+  <div nz-row class="px-4 pt-4">
+    <div nz-col nzSpan="24" class="pb-8 text-center">
+      <div class="card-slider">
+        <div class="card-items">
+          <nz-card *ngFor="let hospital of hospitals" class="card-item" nzHoverable [nzCover]="coverTemplate"
+            (click)="onTriggerFlyEvent(hospital)"
+            [ngStyle]="{'min-width':setCardItemWidth(), 'max-width':setCardItemWidth()}">
+            <nz-card-meta [nzTitle]="hospital.hospital_name"
+              [nzDescription]="hospital.address1 + ', ' + hospital.city_name + ', ' + hospital.state_name + ', India'"></nz-card-meta>
+          </nz-card>
+          <ng-template #coverTemplate>
+            <img alt="hospital" src="/assets/images/hospital_thumbnail.png" />
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="loading" class="loading">
+  <nz-spin nzSimple nzTip="Loading.."></nz-spin>
+</div>
